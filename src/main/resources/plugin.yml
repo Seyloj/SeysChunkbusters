@@ -1,0 +1,33 @@
+name: SeysChunkbuster
+version: '1.0'
+main: com.seyloj.seysChunkbuster.SeysChunkbuster
+api-version: '1.13'
+
+softdepend: [FastAsyncWorldEdit]
+
+commands:
+  chunkbuster:
+    description: Give chunkbuster to a player
+    usage: /chunkbuster give <player> <type> [amount]
+    permission: chunkbuster.give
+  chunkbusterrollback:
+    description: Rollback a chunkbuster
+    usage: /chunkbusterrollback [player]
+    permission: seyschunkbuster.rollback.others
+
+permissions:
+  seyschunkbuster.admin:
+    description: Allows using admin commands
+    default: op
+  seyschunkbuster.bypasscooldown:
+    description: Allows bypassing chunkbuster cooldown
+    default: op
+  seyschunkbuster.rollback:
+    description: Allows rolling back own chunkbusts
+    default: op
+  seyschunkbuster.rollback.others:
+    description: Allows rolling back chunkbusts of other players
+    default: op
+  seyschunkbuster.use.*:
+    description: Allows using all chunkbusters
+    default: op

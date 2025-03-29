@@ -1,0 +1,33 @@
+default_buster:
+  material: BEACON
+  title: "&b&lChunk Buster"
+  lore:
+    - "&7Place this to obliterate a chunk!"
+    - "&cWarning: This action is irreversible."
+    - "&eRadius: Entire chunk"
+    - "&8&o(ignores bedrock layer)"
+
+  # Determines how deep the buster will go
+  bottomlayeroffset: 0 # 0 = full depth, 3 = stops 3 blocks above bottom
+
+  # Determines how wide the area is
+  radius: -1 # -1 = full chunk (16x16), 2 = 5x5 area
+  shape: SQUARE # or CIRCLE, used only if radius > 0
+
+  # Block filtering
+  blacklist:
+    - BEDROCK
+    - SPAWNER
+  invertblacklist: false # If true, only these blocks will be removed
+
+  # Extra: Y-level restriction
+  min_y: 0    # Optional: won't bust below this Y
+  max_y: 256  # Optional: won't bust above this Y
+
+  # Extra: Safety & confirmation
+  require_confirmation: true # Prevent accidental placement
+  sound_on_bust: ENTITY_GENERIC_EXPLODE
+  particle_on_bust: EXPLOSION_LARGE
+
+  # Extra: Cooldown per player (in seconds)
+  cooldown: 60

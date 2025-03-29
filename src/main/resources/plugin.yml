@@ -3,8 +3,6 @@ version: '1.0'
 main: com.seyloj.seysChunkbuster.SeysChunkbuster
 api-version: '1.13'
 
-softdepend: [FastAsyncWorldEdit]
-
 commands:
   chunkbuster:
     description: Give chunkbuster to a player

@@ -20,7 +20,8 @@ public class ConfirmationClickListener implements Listener {
         if (!(e.getWhoClicked() instanceof Player)) return;
 
         Player player = (Player) e.getWhoClicked();
-        if (!e.getView().getTitle().equals(ChunkbusterConfirmGUI.GUI_TITLE)) return;
+        if (!(e.getInventory().getHolder() instanceof ChunkbusterConfirmGUI.ConfirmHolder)) return;
+
 
         e.setCancelled(true);
 

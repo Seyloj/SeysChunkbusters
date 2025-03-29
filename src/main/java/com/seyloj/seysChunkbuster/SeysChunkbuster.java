@@ -4,6 +4,9 @@ import com.seyloj.seysChunkbuster.commands.ChunkbusterCommand;
 import com.seyloj.seysChunkbuster.commands.ChunkbusterTabCompleter;
 import com.seyloj.seysChunkbuster.commands.RollbackCommand;
 import com.seyloj.seysChunkbuster.config.ConfigManager;
+import com.seyloj.seysChunkbuster.fawe.FAWEHook;
+import com.seyloj.seysChunkbuster.fawe.FAWEHookImpl;
+import com.seyloj.seysChunkbuster.fawe.FAWENotAvailable;
 import com.seyloj.seysChunkbuster.listeners.ConfirmationClickListener;
 import com.seyloj.seysChunkbuster.listeners.PlacementListener;
 import com.seyloj.seysChunkbuster.model.ChunkBuster;
@@ -24,6 +27,8 @@ public final class SeysChunkbuster extends JavaPlugin {
     private static boolean faweEnabled;
 
     private ConfigManager configManager;
+
+    private static FAWEHook faweHook;
 
     @Override
     public void onEnable() {
@@ -51,6 +56,17 @@ public final class SeysChunkbuster extends JavaPlugin {
 
         if(faweEnabled) {
             RollbackManager.setMaxRollback(configManager.getMaxRollbacksPerPlayer());
+            if (isFAWEEnabled()) {
+                try {
+                    faweHook = new FAWEHookImpl();
+                    getLogger().info("FAWE support enabled.");
+                } catch (Throwable e) {
+                    getLogger().warning("Failed to initialize FAWE support: " + e.getMessage());
+                }
+            } else {
+                getLogger().warning("FAWE not found. Falling back to vanilla chunkbusting.");
+                this.faweHook = new FAWENotAvailable();
+            }
         }
 
 
@@ -91,5 +107,9 @@ public final class SeysChunkbuster extends JavaPlugin {
 
     public Collection<ChunkBuster> getAllChunkBusters() {
         return chunkBusters.values();
+    }
+
+    public static FAWEHook getFAWEHook() {
+        return faweHook;
     }
 }

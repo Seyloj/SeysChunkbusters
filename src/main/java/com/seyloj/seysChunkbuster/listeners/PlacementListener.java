@@ -82,17 +82,14 @@ public class PlacementListener implements Listener {
 
         switch (buster.getPlacementBehavior()) {
             case BREAK:
-                Bukkit.getScheduler().runTaskLater(plugin, () ->
-                        e.getBlock().setType(Material.AIR, false), 1L);
+                e.getBlock().setType(Material.AIR);
                 break;
 
             case DROP:
-                Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                    e.getBlock().setType(Material.AIR, false);
-                    ItemStack dropClone = item.clone();
-                    dropClone.setAmount(1);
-                    player.getWorld().dropItemNaturally(e.getBlock().getLocation(), dropClone);
-                }, 1L);
+                e.getBlock().setType(Material.AIR, false);
+                ItemStack dropClone = item.clone();
+                dropClone.setAmount(1);
+                player.getWorld().dropItemNaturally(e.getBlock().getLocation(), dropClone);
                 break;
 
             case KEEP:

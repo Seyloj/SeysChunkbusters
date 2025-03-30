@@ -22,6 +22,7 @@
 
 ![Lightning fast chunkbusting and rollbacks](fast.gif)
 ![Various drop features](features.gif)
+![Custom fill features](customfill.gif)
 
 ## Getting Started
 

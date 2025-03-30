@@ -1,6 +1,6 @@
-# SeysChunkbuster
+# Seys Chunkbuster
 
-**SeysChunkbuster** is a powerful, configurable, and performance-friendly plugin that allows server administrators to define and manage custom chunkbusters — tools that perform configurable block-breaking operations across chunks or defined areas. This plugin supports Minecraft 1.14 through 1.21, with optional FastAsyncWorldEdit (FAWE) integration for optimal performance and rollback functionality.
+**Seys Chunkbuster** is a powerful, configurable, and performance-friendly plugin that allows server administrators to define and manage custom chunkbusters — tools that perform configurable block-breaking operations across chunks or defined areas. This plugin supports Minecraft 1.14 through 1.21, with optional FastAsyncWorldEdit (FAWE) integration for optimal performance and rollback functionality.
 
 ---
 

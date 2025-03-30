@@ -20,6 +20,7 @@
 
 ---
 
+![Lightning fast chunkbusting and rollbacks](fast.gif)
 
 ## Getting Started
 

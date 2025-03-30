@@ -20,9 +20,9 @@
 
 ---
 
-![Lightning fast chunkbusting and rollbacks](fast.gif)
-![Various drop features](features.gif)
-![Custom fill features](customfill.gif)
+![Lightning fast chunkbusting and rollbacks](media/fast.gif)
+![Various drop features](media/features.gif)
+![Custom fill features](media/customfill.gif)
 
 ## Getting Started
 

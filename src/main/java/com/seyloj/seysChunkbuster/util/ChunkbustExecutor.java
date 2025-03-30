@@ -141,11 +141,16 @@ public class ChunkbustExecutor {
     }
 
     private static void clearColumn(World world, int x, int z, int minY, int maxY, ChunkBuster buster, Player player) {
+        Material fillMaterial = buster.getFillMaterial();
+        if(!fillMaterial.isBlock()) {
+            SeysChunkbuster.instance.logError("Fill material " + fillMaterial.name() + " is not a block...");
+            return;
+        }
         for (int y = minY; y <= maxY; y++) {
             Block block = world.getBlockAt(x, y, z);
             Material type = block.getType();
 
-            if(type.equals(Material.AIR)) {
+            if(type.equals(fillMaterial)) {
                 continue;
             }
 
@@ -158,7 +163,7 @@ public class ChunkbustExecutor {
 
             switch (behavior) {
                 case CLEAR:
-                    block.setType(Material.AIR, false);
+                    block.setType(fillMaterial, false);
                     break;
 
                 case DROPRAWITEM:
@@ -168,7 +173,7 @@ public class ChunkbustExecutor {
                 case DROPSILKITEM:
                     ItemStack silkItem = new ItemStack(type);
                     world.dropItemNaturally(block.getLocation(), silkItem);
-                    block.setType(Material.AIR, false);
+                    block.setType(fillMaterial, false);
                     break;
 
                 case GIVERAWITEM:
@@ -176,12 +181,12 @@ public class ChunkbustExecutor {
                     for (ItemStack drop : drops) {
                         player.getInventory().addItem(drop);
                     }
-                    block.setType(Material.AIR, false);
+                    block.setType(fillMaterial, false);
                     break;
 
                 case GIVESILKITEM:
                     player.getInventory().addItem(new ItemStack(type));
-                    block.setType(Material.AIR, false);
+                    block.setType(fillMaterial, false);
                     break;
             }
         }

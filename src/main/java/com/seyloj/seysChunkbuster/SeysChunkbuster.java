@@ -30,8 +30,11 @@ public final class SeysChunkbuster extends JavaPlugin {
 
     private static FAWEHook faweHook;
 
+    public static SeysChunkbuster instance;
+
     @Override
     public void onEnable() {
+        instance = this;
         this.configManager = new ConfigManager(this);
 
         pluginKey = new NamespacedKey(this, "SeysChunkbusterKey");
@@ -112,4 +115,16 @@ public final class SeysChunkbuster extends JavaPlugin {
     public static FAWEHook getFAWEHook() {
         return faweHook;
     }
+
+
+    public void logInfo(String message) {
+        getLogger().info(message);
+    }
+    public void logWarning(String message) {
+        getLogger().warning(message);
+    }
+    public void logError(String message) {
+        getLogger().severe(message);
+    }
+
 }

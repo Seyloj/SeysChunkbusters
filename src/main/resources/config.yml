@@ -1,34 +1,10 @@
-default_buster:
-  material: BEACON
-  title: "&b&lChunk Buster"
-  lore:
-    - "&7Place this to obliterate a chunk!"
-    - "&cWarning: This action is irreversible."
-    - "&eRadius: Entire chunk"
-    - "&8&o(ignores bedrock layer)"
+use-fawe-if-available: true #Should chunkbusting be done using FAWE (FastAsyncWorldEdit) if available? Highly recommended for performance reasons
 
-  # Determines how deep the buster will go
-  bottomlayeroffset: 0 # 0 = full depth, 3 = stops 3 blocks above bottom
+max-rollbacks-per-player: 10 #Max number of chunkbust rollbacks per player (adjust this based on your player count)
 
-  # Determines how wide the area is
-  radius: -1 # -1 = full chunk (16x16), 2 = 5x5 area
-  shape: SQUARE # or CIRCLE, used only if radius > 0
+disabledworlds:
+  - hub
+  - creative
+invertworldcheck: false #If true, the list above acts like a whitelist instead
 
-  # Block filtering
-  blacklist:
-    - BEDROCK
-    - SPAWNER
-  invertblacklist: false # If true, only these blocks will be removed
-
-  # Extra: Y-level restriction
-  min_y: 0    # Optional: won't bust below this Y
-  max_y: 256  # Optional: won't bust above this Y
-
-  # Extra: Safety & confirmation
-  require_confirmation: true # Prevent accidental placement
-  sound_on_bust: ENTITY_GENERIC_EXPLODE
-  particle_on_bust: EXPLOSION_LARGE
-
-  # Extra: Cooldown per player (in seconds)
-  cooldown: 60
-  break_behavior: CLEAR
+global-cooldown: false #Should chunkbuster cooldowns be shared between all chunkbusters or be per-chunkbuster type?

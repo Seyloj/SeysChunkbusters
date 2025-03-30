@@ -1,5 +1,6 @@
 package com.seyloj.seysChunkbuster.fawe;
 
+import com.seyloj.seysChunkbuster.SeysChunkbuster;
 import com.seyloj.seysChunkbuster.model.BreakBehavior;
 import com.seyloj.seysChunkbuster.model.ChunkBuster;
 import com.seyloj.seysChunkbuster.model.Shape;
@@ -10,6 +11,7 @@ import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.world.block.BlockType;
 import com.sk89q.worldedit.world.block.BlockTypes;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -113,6 +115,13 @@ public class FAWEHookImpl implements FAWEHook {
         int endX = (radius < 0) ? startX + 15 : centerX + radius;
         int endZ = (radius < 0) ? startZ + 15 : centerZ + radius;
 
+        Material fillMaterial = buster.getFillMaterial();
+        if(!fillMaterial.isBlock()) {
+            SeysChunkbuster.instance.logError("Fill material " + fillMaterial.name() + " is not a block...");
+            return;
+        }
+        BlockType blockType = BlockTypes.get(fillMaterial.name().toLowerCase());
+
         for (int x = startX; x <= endX; x++) {
             for (int z = startZ; z <= endZ; z++) {
                 double dx = x - centerX;
@@ -130,7 +139,7 @@ public class FAWEHookImpl implements FAWEHook {
                     }
 
                     BlockVector3 pos = BlockVector3.at(x, y, z);
-                    editSession.setBlock(pos, BlockTypes.AIR.getDefaultState());
+                    editSession.setBlock(pos, blockType);
                 }
             }
         }
@@ -149,6 +158,14 @@ public class FAWEHookImpl implements FAWEHook {
         int endX = (radius < 0) ? startX + 15 : centerX + radius;
         int endZ = (radius < 0) ? startZ + 15 : centerZ + radius;
 
+        Material fillMaterial = buster.getFillMaterial();
+        if(!fillMaterial.isBlock()) {
+            SeysChunkbuster.instance.logError("Fill material " + fillMaterial.name() + " is not a block...");
+            return;
+        }
+        BlockType blockType = BlockTypes.get(fillMaterial.name().toLowerCase());
+
+
         for (int x = startX; x <= endX; x++) {
             for (int z = startZ; z <= endZ; z++) {
                 double dx = x - centerX;
@@ -160,7 +177,7 @@ public class FAWEHookImpl implements FAWEHook {
                     Block bukkitBlock = world.getBlockAt(x, y, z);
                     Material type = bukkitBlock.getType();
 
-                    if (type == Material.AIR) continue;
+                    if (type == fillMaterial) continue;
 
                     boolean isIgnored = buster.getBlacklist().contains(type);
                     if ((isIgnored && !buster.isInvertBlacklist()) || (!isIgnored && buster.isInvertBlacklist())) {
@@ -168,7 +185,7 @@ public class FAWEHookImpl implements FAWEHook {
                     }
 
                     BlockVector3 pos = BlockVector3.at(x, y, z);
-                    editSession.setBlock(pos, BlockTypes.AIR.getDefaultState());
+                    editSession.setBlock(pos, blockType);
 
                     switch (buster.getBreakBehavior()) {
                         case DROPSILKITEM:

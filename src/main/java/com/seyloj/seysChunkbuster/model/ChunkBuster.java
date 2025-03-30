@@ -26,6 +26,7 @@ public class ChunkBuster {
     private final PlacementBehavior placementBehavior;
     private final VerticalBehavior verticalBehavior;
     private final BreakBehavior breakBehavior;
+    private final Material fillMaterial;
 
 
     private ChunkBuster(Builder builder) {
@@ -45,6 +46,7 @@ public class ChunkBuster {
         this.placementBehavior = builder.placementBehavior;
         this.verticalBehavior = builder.verticalBehavior;
         this.breakBehavior = builder.breakBehavior;
+        this.fillMaterial = builder.fillMaterial;
     }
 
     public static class Builder {
@@ -64,6 +66,7 @@ public class ChunkBuster {
         private PlacementBehavior placementBehavior = PlacementBehavior.BREAK;
         private VerticalBehavior verticalBehavior = VerticalBehavior.BELOW;
         private BreakBehavior breakBehavior = BreakBehavior.CLEAR;
+        private Material fillMaterial = Material.AIR;
 
 
         public Builder() {
@@ -86,6 +89,7 @@ public class ChunkBuster {
             this.cooldown = existing.getCooldown();
             this.placementBehavior = existing.getPlacementBehavior();
             this.breakBehavior = existing.getBreakBehavior();
+            this.fillMaterial = existing.getFillMaterial();
         }
 
 
@@ -169,6 +173,11 @@ public class ChunkBuster {
             return this;
         }
 
+        public Builder setFillMaterial(Material fillMaterial) {
+            this.fillMaterial = fillMaterial;
+            return this;
+        }
+
         public ChunkBuster build() {
             return new ChunkBuster(this);
         }
@@ -236,5 +245,9 @@ public class ChunkBuster {
 
     public BreakBehavior getBreakBehavior() {
         return breakBehavior;
+    }
+
+    public Material getFillMaterial() {
+        return fillMaterial;
     }
 }

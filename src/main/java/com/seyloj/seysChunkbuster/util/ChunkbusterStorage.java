@@ -80,6 +80,8 @@ public class ChunkbusterStorage {
         section.set("cooldown", buster.getCooldown());
         section.set("placement_behavior", buster.getPlacementBehavior().name());
         section.set("vertical_behavior", buster.getVerticalBehavior().name());
+        section.set("break_behavior", buster.getBreakBehavior().name());
+        section.set("fill_material", buster.getFillMaterial().name());
     }
 
     private static ChunkBuster parseBuster(String id, ConfigurationSection section) {
@@ -110,6 +112,7 @@ public class ChunkbusterStorage {
         PlacementBehavior placementBehavior = PlacementBehavior.valueOf(section.getString("placement_behavior", "BREAK").toUpperCase());
         VerticalBehavior verticalBehavior = VerticalBehavior.valueOf(section.getString("vertical_behavior", "BELOW").toUpperCase());
         BreakBehavior breakBehavior = BreakBehavior.valueOf(section.getString("break_behavior", "CLEAR").toUpperCase());
+        Material fillMaterial = Material.getMaterial(section.getString("fill_material", "AIR").toUpperCase());
 
         return new ChunkBuster.Builder()
                 .setId(id)
@@ -128,6 +131,7 @@ public class ChunkbusterStorage {
                 .setPlacementBehavior(placementBehavior)
                 .setVerticalBehavior(verticalBehavior)
                 .setBreakBehavior(breakBehavior)
+                .setFillMaterial(fillMaterial)
                 .build();
     }
 }

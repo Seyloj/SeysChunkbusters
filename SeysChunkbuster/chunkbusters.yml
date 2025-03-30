@@ -1,0 +1,143 @@
+default_buster:
+  material: BEACON
+  title: §b§lChunk Buster
+  lore:
+  - §7Place this to obliterate a chunk!
+  - '§cWarning: This action is irreversible.'
+  - '§eRadius: Entire chunk'
+  - §8§o(ignores bedrock layer)
+  bottomlayeroffset: 0
+  radius: -1
+  shape: SQUARE
+  blacklist:
+  - BEDROCK
+  - SPAWNER
+  invertblacklist: false
+  
+  require_confirmation: true
+  sound_on_bust: ENTITY.GENERIC.EXPLODE
+  particle_on_bust: EXPLOSION
+  cooldown: 60
+  placement_behavior: DROP
+  vertical_behavior: EQUAL
+
+bedrock_buster:
+  material: BEACON
+  title: '&b&lBedrock Buster'
+  lore:
+  - '&7Place this to obliterate all and any bedrock!'
+  - '&cWarning: This action is irreversible.'
+  - '&eRadius: Entire chunk'
+  
+  # Determines how deep the buster will go
+  bottomlayeroffset: 1 # 0 = full depth, 3 = stops 3 blocks above bottom
+  placement_behavior: BREAK
+  
+  # Determines how wide the area is
+  radius: -1 # -1 = full chunk (16x16), 2 = 5x5 area
+  shape: SQUARE # or CIRCLE, used only if radius > 0
+  
+  # Block filtering
+  blacklist:
+  - BEDROCK
+  - SPAWNER
+  invertblacklist: true # If true, only these blocks will be removed
+  
+  # Extra: Safety & confirmation
+  require_confirmation: true # Prevent accidental placement
+  sound_on_bust: ENTITY_GENERIC_EXPLODE
+  particle_on_bust: EXPLOSION_LARGE
+  
+  # Extra: Cooldown per player (in seconds)
+  cooldown: 60
+super_sponge:
+  material: SPONGE
+  title: §e§lSuper Sponge
+  lore: []
+  bottomlayeroffset: 0
+  radius: -1
+  shape: SQUARE
+  blacklist:
+  - WATER
+  invertblacklist: true
+  
+  require_confirmation: false
+  sound_on_bust: ENTITY.GENERIC.EXPLODE
+  particle_on_bust: EXPLOSION
+  cooldown: 0
+  placement_behavior: BREAK
+  break_behavior: CLEAR
+void_buster:
+  material: BEDROCK
+  title: §1§lVoid Buster
+  lore: []
+  bottomlayeroffset: 0
+  radius: 128
+  shape: CIRCLE
+  blacklist:
+  - AIR
+  invertblacklist: false
+  
+  require_confirmation: false
+  sound_on_bust: NONE
+  particle_on_bust: NONE
+  cooldown: 0
+  placement_behavior: BREAK
+  vertical_behavior: FULLCHUNK
+  break_behavior: CLEAR
+  fill_material: DIRT
+chunk_miner:
+  material: POINTED_DRIPSTONE
+  title: §7§lChunk Miner
+  lore: []
+  bottomlayeroffset: 0
+  radius: -1
+  shape: SQUARE
+  blacklist:
+  - COAL_ORE
+  - DEEPSLATE_COAL_ORE
+  - IRON_ORE
+  - DEEPSLATE_IRON_ORE
+  - COPPER_ORE
+  - DEEPSLATE_COPPER_ORE
+  - GOLD_ORE
+  - DEEPSLATE_GOLD_ORE
+  - REDSTONE_ORE
+  - DEEPSLATE_REDSTONE_ORE
+  - EMERALD_ORE
+  - DEEPSLATE_EMERALD_ORE
+  - LAPIS_ORE
+  - DEEPSLATE_LAPIS_ORE
+  - DIAMOND_ORE
+  - DEEPSLATE_DIAMOND_ORE
+  - NETHER_GOLD_ORE
+  - NETHER_QUARTZ_ORE
+  - ANCIENT_DEBRIS
+  invertblacklist: true
+  require_confirmation: false
+  sound_on_bust: ENTITY.GENERIC.EXPLODE
+  particle_on_bust: EXPLOSION
+  cooldown: 0
+  placement_behavior: BREAK
+  vertical_behavior: BELOW
+  break_behavior: DROPSILKITEM
+water_filler:
+  material: BLUE_GLAZED_TERRACOTTA
+  title: §3§lWater Filler
+  lore: []
+  bottomlayeroffset: 0
+  radius: -1
+  shape: SQUARE
+  blacklist:
+  - AIR
+  invertblacklist: true
+  require_confirmation: false
+  sound_on_bust: ENTITY.GENERIC.EXPLODE
+  particle_on_bust: CLOUD
+  cooldown: 0
+  placement_behavior: BREAK
+  vertical_behavior: EQUAL
+  break_behavior: CLEAR
+  fill_material: WATER
+
+

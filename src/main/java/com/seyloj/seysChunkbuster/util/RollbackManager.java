@@ -35,7 +35,6 @@ public class RollbackManager {
         UUID playerId = player.getUniqueId();
         Deque<EditSession> sessions = editSessions.get(playerId);
         if (sessions == null || sessions.isEmpty()) {
-            player.sendMessage("No edits to rollback.");
             return false;
         }
         EditSession editSession = sessions.pop();
@@ -43,11 +42,9 @@ public class RollbackManager {
             EditSession undoSession = WorldEdit.getInstance().newEditSession(editSession.getWorld());
             editSession.undo(undoSession);
             undoSession.flushQueue();
-            player.sendMessage("Rollback successful.");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            player.sendMessage("Rollback failed.");
             return false;
         }
     }

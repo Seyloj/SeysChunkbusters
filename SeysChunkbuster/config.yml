@@ -1,0 +1,10 @@
+use-fawe-if-available: true #Should chunkbusting be done using FAWE (FastAsyncWorldEdit) if available? Highly recommended for performance reasons
+
+max-rollbacks-per-player: 3
+
+disabledworlds:
+  - hub
+  - creative
+invertworldcheck: false
+
+global-cooldown: false #Should chunkbuster cooldowns be shared between all chunkbusters or be per-chunkbuster type?

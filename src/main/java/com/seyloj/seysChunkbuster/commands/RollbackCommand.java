@@ -1,5 +1,6 @@
 package com.seyloj.seysChunkbuster.commands;
 
+import com.seyloj.seysChunkbuster.SeysChunkbuster;
 import com.seyloj.seysChunkbuster.util.RollbackManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -43,7 +44,11 @@ public class RollbackCommand implements CommandExecutor {
                 target.sendMessage(ChatColor.YELLOW + "Your last chunkbuster was rolled back by " + sender.getName() + ".");
             }
         } else {
-            sender.sendMessage(ChatColor.RED + "(!) Failed to rollback for " + target.getName() + ". Check console for errors.");
+            if(SeysChunkbuster.isFAWEEnabled()) {
+                sender.sendMessage(ChatColor.RED + "(!) Failed to rollback for " + target.getName() + ". Check console for errors.");
+            } else {
+                sender.sendMessage(ChatColor.RED + "(!) FAWE is required for rollback support.");
+            }
         }
 
         return true;

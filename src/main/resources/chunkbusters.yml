@@ -3,16 +3,16 @@ default_buster:
   title: "&b&lChunk Buster"
   lore:
     - "&7Place this to obliterate a chunk!"
-    - "&cWarning: This action is irreversible."
     - "&eRadius: Entire chunk"
     - "&8&o(ignores bedrock layer)"
 
-  # Determines how deep the buster will go
-  bottomlayeroffset: 0 # 0 = full depth, 3 = stops 3 blocks above bottom
+  # Players must have permission: seyschunkbuster.use.default_buster
+  # Determines how deep the buster will go. 0 = full depth, 3 = stops 3 blocks above bottom. (Offset from world min height)
+  bottomlayeroffset: 0
 
-  # Determines how wide the area is
-  radius: -1 # -1 = full chunk (16x16), 2 = 5x5 area
-  shape: SQUARE # or CIRCLE, used only if radius > 0
+  # Determines how wide the area is. -1 = full chunk (16x16), 2 = 5x5 area
+  radius: -1
+  shape: SQUARE # SQUARE or CIRCLE (only used if radius > 0)
 
   # Block filtering
   blacklist:
@@ -20,14 +20,57 @@ default_buster:
     - SPAWNER
   invertblacklist: false # If true, only these blocks will be removed
 
-  # Extra: Y-level restriction
-  min_y: 0    # Optional: won't bust below this Y
-  max_y: 256  # Optional: won't bust above this Y
+  # Break behavior:
+  # - CLEAR: Remove blocks directly
+  # - DROPRAWITEM: Drop mined items
+  # - DROPSILKITEM: Drop block item (silk touch)
+  # - GIVERAWITEM: Give mined items to player
+  # - GIVESILKITEM: Give block items to player
+  break_behavior: CLEAR
 
   # Extra: Safety & confirmation
-  require_confirmation: true # Prevent accidental placement
+  require_confirmation: true
   sound_on_bust: ENTITY_GENERIC_EXPLODE
   particle_on_bust: EXPLOSION_LARGE
 
   # Extra: Cooldown per player (in seconds)
   cooldown: 60
+
+  # Placement behavior:
+  # - BREAK: Remove placed block
+  # - DROP: Break and drop item
+  # - KEEP: Don't consume the item
+  placement_behavior: DROP
+
+  # Specifies max Y level of the effect based on placed Y:
+  # EQUAL = Stop at same level
+  # BELOW = Stop 1 below
+  # FULLCHUNK = Full vertical space
+  vertical_behavior: EQUAL
+
+  # Replace busted air with this material (e.g., WATER for a water-filler)
+  fill_material: AIR
+
+  # Note: Global cooldown behavior is set in config.yml (global-cooldown: true/false)
+
+super_sponge:
+  material: SPONGE
+  title: "&e&lSuper Sponge"
+  lore:
+    - "&7Place this to dry out a chunk!"
+    - "&eRadius: Entire chunk"
+  bottomlayeroffset: 0
+  radius: -1
+  shape: SQUARE
+  blacklist:
+    - WATER
+  invertblacklist: true
+  break_behavior: CLEAR
+
+  require_confirmation: false
+  sound_on_bust: NONE
+  particle_on_bust: NONE
+  cooldown: 0
+  placement_behavior: BREAK
+  vertical_behavior: FULLCHUNK
+  fill_material: AIR

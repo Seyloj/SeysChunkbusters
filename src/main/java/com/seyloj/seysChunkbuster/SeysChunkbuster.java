@@ -9,6 +9,7 @@ import com.seyloj.seysChunkbuster.fawe.FAWEHookImpl;
 import com.seyloj.seysChunkbuster.fawe.FAWENotAvailable;
 import com.seyloj.seysChunkbuster.listeners.ConfirmationClickListener;
 import com.seyloj.seysChunkbuster.listeners.PlacementListener;
+import com.seyloj.seysChunkbuster.metrics.Metrics;
 import com.seyloj.seysChunkbuster.model.ChunkBuster;
 import com.seyloj.seysChunkbuster.util.ChunkbustExecutor;
 import com.seyloj.seysChunkbuster.util.ChunkbusterStorage;
@@ -71,6 +72,9 @@ public final class SeysChunkbuster extends JavaPlugin {
                 this.faweHook = new FAWENotAvailable();
             }
         }
+
+        int pluginId = 25305;
+        Metrics metrics = new Metrics(this, pluginId);
 
 
     }

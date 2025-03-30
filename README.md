@@ -21,6 +21,7 @@
 ---
 
 ![Lightning fast chunkbusting and rollbacks](fast.gif)
+![Various drop features](features.gif)
 
 ## Getting Started
 

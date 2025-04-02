@@ -11,6 +11,7 @@ default_buster:
   bottomlayeroffset: 0
 
   # Determines how wide the area is. -1 = full chunk (16x16), 2 = 5x5 area
+  # No area break permission check is done by the chunkbuster, so use a custom radius at your own risk
   radius: -1
   shape: SQUARE # SQUARE or CIRCLE (only used if radius > 0)
 

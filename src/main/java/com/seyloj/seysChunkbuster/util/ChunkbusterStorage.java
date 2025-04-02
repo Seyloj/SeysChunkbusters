@@ -88,8 +88,10 @@ public class ChunkbusterStorage {
         Material material = Material.getMaterial(section.getString("material", "BEACON"));
         if (material == null) throw new IllegalArgumentException("Invalid material for chunkbuster: " + id);
 
-        String title = section.getString("title", "");
-        List<String> lore = section.getStringList("lore");
+        String title = ColorUtil.color(section.getString("title", ""));
+        List<String> lore = section.getStringList("lore").stream()
+                .map(ColorUtil::color)
+                .collect(Collectors.toList());
         int bottomLayerOffset = section.getInt("bottomlayeroffset", 0);
         int radius = section.getInt("radius", -1);
         Shape shape = Shape.valueOf(section.getString("shape", "SQUARE").toUpperCase());

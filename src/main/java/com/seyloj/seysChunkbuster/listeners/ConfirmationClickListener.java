@@ -1,11 +1,14 @@
 package com.seyloj.seysChunkbuster.listeners;
 
 import com.seyloj.seysChunkbuster.gui.ChunkbusterConfirmGUI;
+import com.seyloj.seysChunkbuster.model.ChunkBuster;
+import com.seyloj.seysChunkbuster.model.PlacementBehavior;
 import com.seyloj.seysChunkbuster.util.BustCache;
 import com.seyloj.seysChunkbuster.util.ChunkbustExecutor;
 import com.seyloj.seysChunkbuster.util.ConfirmationCache;
 import com.seyloj.seysChunkbuster.util.PendingBust;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -51,6 +54,32 @@ public class ConfirmationClickListener implements Listener {
         }
 
         player.sendMessage(ChatColor.GREEN + "Chunkbuster activated!");
-        ChunkbustExecutor.execute(bust.getLocation(), bust.getChunkBuster(), player);
+
+        ChunkBuster buster = bust.getChunkBuster();
+        if (player.getGameMode() != GameMode.CREATIVE) {
+            switch (buster.getPlacementBehavior()) {
+                case BREAK:
+                    ItemStack breakItem = player.getInventory().getItem(bust.getHand());
+                    if (breakItem != null && breakItem.getAmount() > 0) {
+                        breakItem.setAmount(breakItem.getAmount() - 1);
+                        player.getInventory().setItem(bust.getHand(), breakItem);
+                    }
+                    break;
+
+                case DROP:
+                    ItemStack dropItem = player.getInventory().getItem(bust.getHand());
+                    if (dropItem != null && dropItem.getAmount() > 0) {
+                        ItemStack toDrop = dropItem.clone();
+                        toDrop.setAmount(1);
+                        player.getWorld().dropItemNaturally(bust.getLocation(), toDrop);
+                        dropItem.setAmount(dropItem.getAmount() - 1);
+                        player.getInventory().setItem(bust.getHand(), dropItem);
+                    }
+                    break;
+            }
+        }
+
+
+        ChunkbustExecutor.execute(bust.getLocation(), buster, player);
     }
 }

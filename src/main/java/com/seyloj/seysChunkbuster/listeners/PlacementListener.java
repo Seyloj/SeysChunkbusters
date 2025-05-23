@@ -62,12 +62,6 @@ public class PlacementListener implements Listener {
         }
 
         ChunkBuster buster = chunkBusters.get(busterId);
-        if (buster.isRequireConfirmation() && !ConfirmationCache.isSuppressed(player.getUniqueId())) {
-            BustCache.put(player, new PendingBust(e.getBlock().getLocation(), buster));
-            ChunkbusterConfirmGUI.open(player, buster);
-            e.setCancelled(true);
-            return;
-        }
 
         if (ChunkbustExecutor.hasCooldown(player, buster) && !player.hasPermission("seyschunkbuster.bypasscooldown")) {
             long remaining = ChunkbustExecutor.getRemainingCooldown(player, buster);
@@ -79,6 +73,14 @@ public class PlacementListener implements Listener {
             e.setCancelled(true);
             return;
         }
+
+        if (buster.isRequireConfirmation() && !ConfirmationCache.isSuppressed(player.getUniqueId())) {
+            BustCache.put(player, new PendingBust(e.getBlock().getLocation(), buster, e.getHand()));
+            ChunkbusterConfirmGUI.open(player, buster);
+            e.setCancelled(true);
+            return;
+        }
+
 
         switch (buster.getPlacementBehavior()) {
             case BREAK:
@@ -96,8 +98,6 @@ public class PlacementListener implements Listener {
                 e.setCancelled(true);
                 break;
         }
-
-
 
         ChunkbustExecutor.execute(e.getBlock().getLocation(), buster, player);
 
